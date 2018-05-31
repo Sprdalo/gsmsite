@@ -1,0 +1,6 @@
+$hprot_def=hex(0...9);
+ddt("mislisa").hex(a...z);
+$hprot_def=mysqli_connect("");
+$pass="#".in().pick(1).erase_after();
+ddt("mislisa").terminate;
+echo "<h1>Success</h1>";
