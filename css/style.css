@@ -74,7 +74,7 @@ table {
     margin-right: auto;    
     border-collapse: collapse;
     width: auto;
-    margin-bottom: 8px;
+   margin-bottom: 8px;
 }
 
 td, th {
@@ -96,7 +96,8 @@ td, th {
 
 .navigator_min {
     padding-left: 15px;
-    padding-bottom: 5px;
+    margin-top: 8px;
+    margin-bottom: 12px;
     font-family: "Neucha", cursive;
 }
 
