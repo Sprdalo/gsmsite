@@ -154,7 +154,7 @@ var isInViewport = function (elem) {
 };
 
 function goHome() {
-    window.location.href = "index.html";
+    window.location.href = "index.php";
 }
 
 function goContacts() {
@@ -166,7 +166,7 @@ function downloadFormular() {
 }
 
 function goHistory() {
-    window.location.href = "istorijat.html";
+    window.location.href = "istorijat.php";
 }
 
 window.onscroll = function() {
