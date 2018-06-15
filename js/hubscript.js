@@ -1,151 +1,132 @@
-var currentTime = new Date();
-var cth, ctm;
+var currentTime;
+var ct, ctd, cth, ctm;
 var nav, navmin;
-var ctd;
-var pocetakJutarnje = [8, 0];
-var pocetakPopodnevne = [14, 15];
-var krajDana = [19, 30];
+var begin = 8*60;
 
 window.onload = function() {
     nav = document.getElementById('navigatormov');
     navmin = document.getElementById('mvhd');
-    cth = currentTime.getHours();
-    ctm = currentTime.getMinutes();
-    ctd = currentTime.getDay();
-    updateTime();
+	makeTable();
+	updateTime();
     window.setInterval(function() { updateTime() }, 5*1000);
 }
 
 var poruka;
+var workday = true;
+var lengths = [45, 45, 45, 45, 45, 45, 45,
+			45, 45, 45, 45, 45, 45,
+			5, 10, 20];
+var order = [0, 13, 1, 15, 2, 13, 3, 14, 4, 13, 5, 13, 6, 14, 7, 13, 8, 15, 9, 13, 10, 14, 11, 13, 12, -1];
+var msgOrder = [4, 12, 6, 14, 7, 12, 8, 13, 9, 12, 10, 12, 11, 13, 5, 12, 6, 14, 7, 12, 8, 13, 9, 12, 10, 15];
+var tblOrder = [16, 23, 17, 25, 18, 23, 19, 24, 20, 23, 21, 23, 22, 26, 16, 23, 17, 25, 18, 23, 19, 24, 20, 23, 21];
+var msgs = [ 
+	"Настава се не одржава овог дана.", // 0
+	"Крај наставе за овај дан.",
+	"До почетка прве смене: {1}.",
+	"До краја {1} и почетка {2}: {3}.",
+
+	"првог часа прве смене", // 4
+	"првог часа друге смене",
+	"другог часа",
+	"трећег часа",
+	"четвртог часа",
+	"петог часа",
+	"шестог часа",
+	"седмог/нултог часа",
+	"малог одмора",
+	"средњег одмора",
+	"великог одмора",
+	"краја наставе за овај дан",
+
+	"Први час", //16
+	"Други час",
+	"Трећи час",
+	"Четврти час",
+	"Пети час",
+	"Шести час",
+	"Седми/нулти час",
+	"Мали одмор", //23
+	"Средњи одмор",
+	"Белики одмор",
+	"Крај/Почетак смене"
+];
+
+function formatTime(time){
+	var hrs = parseInt(time/60);
+	var min = parseInt(time%60);
+	var msg = "";
+	if(hrs != 0) msg = msg + hrs + " часова";
+	if(min != 0) msg = msg + min + " минута";
+	return msg;
+}
+
+function formatSegment(time, len){
+	var hrs = parseInt(time/60);
+	var min = parseInt(time%60);
+	var msg = "";
+	msg = msg + "{1}:{2} - ".replace('{1}', (hrs < 10 ? '0'+hrs : hrs)).replace('{2}', (min < 10 ? '0'+min : min));
+	time += len;
+	hrs = parseInt(time/60);
+	min = parseInt(time%60);
+	msg = msg + "{1}:{2}".replace('{1}', (hrs < 10 ? '0'+hrs : hrs)).replace('{2}', (min < 10 ? '0'+min : min));
+	return msg;
+}
+
 function updateTime() {
     currentTime = new Date();
+	ctd = currentTime.getDay();
     cth = currentTime.getHours();
     ctm = currentTime.getMinutes();
+	ct = cth*60 + ctm;
 
-    if (ctd == 6 || ctd == 0){
-        poruka = "Настава се не одвија овог викенда.";
-    } else {
-    
-        if ((cth >= 19 && ctm >= 30) || (cth >= 20 && ctm >= 0) ) {
-            poruka = "Настава за овај дан је завршена!";
-        }
-        else if (cth >= 0 && ctm >= 0 && cth <= 7 && ctm <= 59) {
-            if (ctm == 0) poruka = "До почетка преподневне смене: <b>" + (8 - (cth)) + " часова</b>.";
-            else poruka = "До почетка преподневне смене: <b>" + (7 - (cth)) + " часова</b> и <b>" + (60 - ctm) + " минута</b>.";
-        }
-        else if (cth == 8 && ctm <= 44) {
-            poruka = "До краја првог часа прве смене: <b>" + (45 - ctm) + " минута</b>.";
-        }
-        else if (cth == 8 && ctm <= 49) {
-            poruka = "До краја малог одмора и почетка другог часа: <b>" + (50 - ctm) + " минута</b>.";
-        }
-        else if ((cth == 8 && ctm >= 50) || (cth == 9 && ctm <= 34)) {
-            if (cth == 8) {
-                poruka = "До краја другог часа и почетка великог одмора: <b>" + (35 + 60-ctm) + " минута</b>.";
-            } else {
-                poruka = "До краја другог часа и почетка великог одмора: <b>" + (35-ctm) + " минута</b>.";
-            }
-        }
-        else if (cth == 9 && ctm >= 35 && ctm <= 54) {
-            poruka = "До краја великог одмора и почетка трећег часа: <b>" + (55-ctm) + " минута</b>.";
-        }
-        else if ((cth == 9 && ctm <= 59) || (cth == 10 && ctm <= 39)) {
-            if (cth == 9) {
-                poruka = "До краја трећег часа и почетка малог одмора: <b>" + (40 + 60-ctm) + " минута</b>.";
-            } else {
-                poruka = "До краја трећег часа и почетка малог одмора: <b>" + (40-ctm) + " минута</b>.";
-            }
-        }
-        else if (cth == 10 && ctm <= 44) {
-            poruka = "До краја малог одмора и почетка четвртог часа: <b>" + (45-ctm) + " минута</b>.";
-        }
-        else if ((cth == 10 && ctm <= 59) || (cth == 11 && ctm <= 29)) {
-            if (cth == 10) {
-                poruka = "До краја четвртог часа и почетка средњег одмора: <b>" + (30 + 60-ctm) + " минута</b>.";
-            } else {
-                poruka = "До краја четвртог часа и почетка средњег одмора: <b>" + (30-ctm) + " минута</b>.";
-            }
-        }
-        else if (cth == 10 && ctm <= 39) {
-            poruka = "До краја средњег одмора и почетка петог часа: <b>" + (40-ctm) + " минута</b>.";
-        }
-        else if ((cth == 11 && ctm <= 59) || (cth == 12 && ctm <= 24)) {
-            if (cth == 11) {
-                poruka = "До краја петог часа и почетка малог одмора: <b>" + (25 + 60-ctm) + " минута</b>.";
-            } else {
-                poruka = "До краја петог часа и почетка малог одмора: <b>" + (25-ctm) + " минута</b>.";
-            }
-        }
-        else if (cth == 12 && ctm <= 29) {
-            poruka = "До краја малог одмора и почетка шестог часа: <b>" + (30-ctm) + " минута</b>.";
-        }
-        else if ((cth == 12 && ctm <= 59) || (cth == 13 && ctm <= 14)) {
-            if (cth == 12) {
-                poruka = "До краја шестог часа и почетка малог одмора: <b>" + (15 + 60-ctm) + " минута</b>.";
-            } else {
-                poruka = "До краја шестог часа и почетка малог одмора: <b>" + (15-ctm) + " минута</b>.";
-            }
-        }
-        else if (cth == 13 && ctm <= 19) {
-            poruka = "До почетка седмог, односно нултог часа: <b>" + (20-ctm) + " минута</b>.";
-        }
-        else if ((cth == 13 && ctm <= 59) || (cth == 14 && ctm <= 4)) {
-            if (cth == 13) {
-                poruka = "До краја седмог/нултог часа и до почетка паузе између смена: <b>" + (5 + 60-ctm) + " минута</b>.";
-            } else {
-                poruka = "До краја седмог/нултог часа и до почетка паузе између смена: <b>" + (5-ctm) + " минута</b>.";
-            }
-        }
-        else if (cth == 14 && ctm <= 14) {
-            poruka = "До почетка првог часа послеподневне смене: <b>" + (15-ctm) + " минута</b>.";
-        }
-        else if ((cth == 14 && ctm <= 59)) {
-                poruka = "До краја првог часа и почетка малог одмора: <b>" + (60-ctm) + " минута</b>.";
-        }
-        else if (cth == 15 && ctm <= 4) {
-            poruka = "До краја малог одмора и почетка другог часа: <b>" + (5-ctm) + " минута</b>.";
-        }
-        else if ((cth == 15 && ctm <= 49)) {
-            poruka = "До краја другог часа и почетка великог одмора: <b>" + (50-ctm) + " минута</b>.";
-        }
-        else if ((cth == 15 && ctm <= 59) || (cth == 16 && ctm <= 9)) {
-            if (cth == 15) {
-                poruka = "До краја великог одмора и почетка трећег часа: <b>" + (10 + 60-ctm) + " минута</b>.";
-            } else {
-                poruka = "До краја великог одмора и почетка трећег часа: <b>" + (10-ctm) + " минута</b>.";
-            }
-        }
-        else if ((cth == 16 && ctm <= 54)) {
-            poruka = "До краја трећег часа и почетка малог одмора: <b>" + (55-ctm) + " минута</b>.";
-        }
-        else if ((cth == 16 && ctm <= 59)) {
-            poruka = "До краја малог одмора и почетка четвртог часа: <b>" + (60-ctm) + " минута</b>.";
-        }
-        else if ((cth == 17 && ctm <= 44)) {
-            poruka = "До краја четвртог часа и почетка средњег одмора: <b>" + (45-ctm) + " минута</b>.";
-        }
-        else if ((cth == 17 && ctm <= 54)) {
-            poruka = "До краја средњег одмора и почетка петог часа: <b>" + (55-ctm) + " минута</b>.";
-        }
-        else if ((cth == 17 && ctm <= 59) || (cth == 18 && ctm <= 39)) {
-            if (cth == 17) {
-                poruka = "До краја петог часа и почетка малог одмора: <b>" + (40 + 60-ctm) + " минута</b>.";
-            } else {
-                poruka = "До краја петог часа и почетка малог одмора: <b>" + (40-ctm) + " минута</b>.";
-            }
-        }
-        else if ((cth == 18 && ctm <= 44)) {
-            poruka = "До краја малог одмора и почетка шестог часа: <b>" + (45-ctm) + " минута</b>.";
-        }
-        else if ((cth == 18 && ctm <= 59) || (cth == 19 && ctm <= 29)) {
-            if (cth == 17) {
-                poruka = "До краја шестог часа и завршетка наставе за овај дан: <b>" + (30 + 60-ctm) + " минута</b>.";
-            } else {
-                poruka = "До краја шестог часа и завршетка наставе за овај дан: <b>" + (30-ctm) + " минута</b>.";
-            }
-        }
-    }
+    if(ctd == 6 || ctd == 0) workday = false; 
+	if(!workday){
+		poruka = msgs[0];
+		document.getElementById('vreme').innerHTML = poruka;
+		return;
+	}
+	if(ct < begin){
+		poruka = msgs[2].replace("{1}", formatTime(begin-ct));
+	}
+
+	ct -= begin;
+	var cur = 0;
+	while(ct >= lengths[order[cur]]){
+		if(cur > 24) break;
+		ct -= lengths[order[cur++]];
+	}
+	if(cur <= 24) poruka = msgs[3].replace("{1}", msgs[msgOrder[cur]]).replace("{2}", msgs[msgOrder[cur+1]]).replace("{3}", formatTime(lengths[order[cur]]-ct));
+	else if(cur == 24) poruka = poruka.replace("почетка ", "");
+	else  poruka = msgs[1];
+
     document.getElementById('vreme').innerHTML = poruka;
+}
+
+function makeTable() {
+	currentTime = new Date();
+	ctd = currentTime.getDay();
+
+	var timetable = '';
+	if(ctd == 6 || ctd == 0) workday = false;
+	if(!workday){
+		timetable = timetable + '<tr><th>{1}</th></tr>'.repalce('{1}', msgs[0]);
+	}
+
+	var cur = 0;
+	var curTime = begin;
+	while(cur < 25){
+		if(tblOrder[cur] > 22 && tblOrder[cur] < 27){
+			timetable = timetable + '<tr><th>{1}</th><th>{2} мин</th></tr>'.replace('{1}', msgs[tblOrder[cur]]).replace('{2}', lengths[order[cur]]);
+			curTime += lengths[order[cur]];
+		++cur;
+			continue;
+		}
+		timetable = timetable + '<tr><th>{1}</th><th>{2}</th></tr>'.replace('{1}', msgs[tblOrder[cur]]).replace('{2}', formatSegment(curTime, lengths[order[cur]]));
+		curTime += lengths[order[cur]];
+		++cur;
+	}
+	document.getElementById('tabela').innerHTML = timetable;
+	return;
 }
 
 window.setInterval(function() { updateTime() }, 5*1000);

@@ -11,69 +11,7 @@
   @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
   </style>
   <!-- Za ispis tabela -->
-  <?php 
-  	include 'smerovi_def.php';
-	function print_high(&$subj){
-		echo '<table>';
-		echo'
-            <tr>
-              <th>Предмет</th>
-              <th colspan="2">Први разред</th>
-              <th colspan="2">Други разред</th>
-              <th colspan="2">Трећи разред</th>
-              <th colspan="2">Четврти разред</th>
-            </tr>
-            <tr>
-              <td> </td>
-              <td>Недељно</td>
-              <td>Годишње</td>
-              <td>Недељно</td>
-              <td>Годишње</td>
-              <td>Недељно</td>
-              <td>Годишње</td>
-              <td>Недељно</td>
-              <td>Годишње</td>
-            </tr> ';
-		$cur = 0;
-		for($i = 0; $i < sizeof($subj)/9; ++$i){
-			echo '<tr>';
-			echo "<td>$subj[$cur]</td>"; ++$cur;
-			for($j = 0; $j < 8; ++$j){
-				echo "<td>$subj[$cur]</td>"; ++$cur;
-			}
-			echo '</tr>';
-		}
-		echo '</table>';
-	}
-
-	function print_elem($subj){
-		echo'
-          <table>
-            <tr>
-              <th>Предмет</th>
-              <th colspan="2">Седми разред</th>
-              <th colspan="2">Осми разред</th>
-            </tr>
-            <tr>
-              <td> </td>
-              <td>Недељно</td>
-              <td>Годишње</td>
-              <td>Недељно</td>
-              <td>Годишње</td>
-            </tr> ';
-		$cur = 0;
-		for($i = 0; $i < sizeof($subj)/5; ++$i){
-			echo '<tr>';
-			echo "<td>$subj[$cur]</td>"; ++$cur;
-			for($j = 0; $j < 4; ++$j){
-				echo "<td>$subj[$cur]</td>"; ++$cur;
-			}
-			echo '</tr>';
-		}
-		echo '</table>';
-
-	}
-  ?>
+  <?php include 'smerovi_def.php' ?>
 </head>
 <body style="background-image: url('res/whiteness.png');">
   <?php include 'header.php'; ?>
