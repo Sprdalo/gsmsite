@@ -1,5 +1,5 @@
 <?php echo'
-<div id="hdbd" class="header"> 
+<div id="hdbd" class="header" style="background-image: url(\'res/grogi-bg.jpg\')"> 
 	<img id="naslov" src="res/logo.png" alt="logo"> 
 	<iframe id="clock" src="http://free.timeanddate.com/clock/i69akwaz/n3394/szw210/szh210/hoc000/hbw0/hfc5659ad/cf100/hgr0/hwc000/fan2/facfff/fnu2/fdi76/mqcfff/mqs4/mql18/mqw4/mqd60/mhcfff/mhs4/mhl5/mhw4/mhd62/mmv0/hhcfff/hhs1/hhb10/hmcfff/hms1/hmb10/hscfff/hsw3" frameborder="0" width="210" height="210"></iframe> 
 	<div id="navigatormov" class="navigator"> 
@@ -50,7 +50,7 @@
 	</div> 
 </div>
 
-<div id="mvhd" class="moveableheader" style="margin-top: 16px;">
+<div id="mvhd" class="moveableheader" style="margin-top: 16px; background-image: url(\'res/grogi-bg.jpg\')">
 	<img id="naslovmin" style="width:40%; height: auto; float: left;" src="res/minlogo.png" alt="logo">
 	<div id="navigatormov" class="navigator_min" style="">
 		<div class="dropdown hiddenation">

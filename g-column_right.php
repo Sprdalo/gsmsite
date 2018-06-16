@@ -1,17 +1,17 @@
 <?php echo'
 <div class="column right" style="height: 100%;">
-	<div class="card hvr-grow2">
+	<div class="card hvr-grow">
 		<div class="titleholder" style="height: 100%;">
-			<img src="res/newsimg.png" alt="newsphoto" style="width: 100%;">    
+			<img src="res/g-nimg.png" alt="newsphoto" style="width: 100%;">    
 			<img id="zovnjfoto" src="res/alarm.png" alt="zvonzvon" style="margin-top: -15%; margin-left:34%; width: 32%; height: auto; "> 
 			<br />
 			<span id="newstitle" style="margin-left:0%; text-align: center; ">Тренутно у школи</span>
 			<p id="vreme">Тренутно време</p>
 		</div>
 	</div>
-	<div class="card hvr-grow2"  style="margin-top: 12px;">
+	<div class="card hvr-grow"  style="margin-top: 12px;">
 		<div class="titleholder" style="height: 100%;">
-			<img src="res/newsimg.png" alt="newsphoto" style="width: 100%;">    
+			<img src="res/g-nimg.png" alt="newsphoto" style="width: 100%;">    
 			<img id="zovnjfoto" src="res/bell.png" alt="zvonzvon" style="margin-top: -15%; margin-left:34%; width: 32%; height: auto; "> 
 			<br />
 			<span id="newstitle" style="margin-left:0%; text-align: center; ">Сатница звоњења</span>

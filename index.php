@@ -23,9 +23,9 @@
                     <span id="newstitle2" style="margin-left: 1%;">Упознајте се са новим дигиталним системом уписа ученика!</span>
                     <br>
                     <span style="font-size: large; ">Уписивање никад лакше и модерније са новим системом Гимназије "Светозар Марковић" у Нишу!
-                        Нови сајт школе омогућава будућим ученицима да се упишу преко интернета уместо личног доласка!
-                    </span>
-                    <button class="dropbtn2" style="float: right;"><a href="prijava_za_upis.html">Сазнај више...</a></button>    
+                        Нови сајт школе омогућава будућим ученицима да се упишу преко интернета уместо личног доласка!</span>
+                    
+		<button class="hvr-shutter-out-horizontal2 newsbtn">Сазнај више...</button>    
                 </div>
             </div>
             <!-- News 1 end -->
@@ -41,7 +41,7 @@
                     <br>
                     <span style="font-size: large; ">У учионицама школе се 27.05.2018. одржао пробни тест за упис у први разред специјално-математичког одељења. Анализа задатака ће се одржати 
                     02.06.2018. у просторијама школе.</span>
-                    <button class="dropbtn2" style="float: right;">Погледај резултате...</button>    
+                    <button class="hvr-shutter-out-horizontal2 newsbtn">Сазнај више...</button>       
                 </div>
             </div>
             <!-- News 2 end -->
@@ -58,7 +58,7 @@
                     <span style="font-size: large; ">Објављени су датуми полагања пријемних испита за билингвално, специјално-математичко,
                        специјално-физичко и за седми и осми разред. На полагање обавезно понети ђачку књижицу са фотографијом.
                    </span>
-                   <button class="dropbtn2" style="float: right;">Погледај датуме...</button>    
+                   <button class="hvr-shutter-out-horizontal2 newsbtn">Сазнај више...</button>      
                </div>
            </div>
            <!-- News 3 End -->
@@ -75,7 +75,7 @@
                    <span style="font-size: large; ">Да ли сте икада желели да видите да ли је
                        нека књига доступна у библиотеци, или да је резервишете, али од куће?
                    Нов дигитални систем бибилотеке Гимназије "Светозар Марковић" у Нишу вам то омогућава!</span>
-                   <button class="dropbtn2" style="float: right;">Сазнај више...</button>    
+                  <button class="hvr-shutter-out-horizontal2 newsbtn">Сазнај више...</button>       
                </div>
            </div>
            <!-- News 4 end -->
