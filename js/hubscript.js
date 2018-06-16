@@ -106,14 +106,9 @@ function makeTable() {
 	currentTime = new Date();
 	ctd = currentTime.getDay();
 
-	var timetable = '';
-	if(ctd == 6 || ctd == 0) workday = false;
-	if(!workday){
-		timetable = timetable + '<tr><th>{1}</th></tr>'.repalce('{1}', msgs[0]);
-	}
-
 	var cur = 0;
 	var curTime = begin;
+	var timetable = '';
 	while(cur < 25){
 		if(tblOrder[cur] > 22 && tblOrder[cur] < 27){
 			timetable = timetable + '<tr><th>{1}</th><th>{2} мин</th></tr>'.replace('{1}', msgs[tblOrder[cur]]).replace('{2}', lengths[order[cur]]);
